@@ -118,8 +118,8 @@ class DriverListView(LoginRequiredMixin, generic.ListView):
     model = Driver
     paginate_by = 5
 
-
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(
+            self, *, object_list=None, **kwargs):
         context = super(DriverListView, self).get_context_data(**kwargs)
         username = self.request.GET.get("username", "")
 
@@ -136,6 +136,7 @@ class DriverListView(LoginRequiredMixin, generic.ListView):
             return queryset.filter(username__icontains=username)
 
         return queryset
+
 
 class DriverDetailView(LoginRequiredMixin, generic.DetailView):
     model = Driver

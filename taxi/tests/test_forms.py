@@ -41,16 +41,25 @@ class FormTests(TestCase):
     def test_driver_search_returns_expected_user(self):
         """Check that driver search returns only matching usernames."""
         drivers = [
-            {"username": "viktor", "password": "pass123", "license_number": "RTY45678"},
-            {"username": "denis", "password": "pass123", "license_number": "QWE98765"},
-            {"username": "artemio", "password": "pass123", "license_number": "BVC65432"},
-            {"username": "ghost_man", "password": "pass123", "license_number": "LMN32109"},
+            {"username": "viktor",
+             "password": "pass123",
+             "license_number": "RTY45678"},
+            {"username": "denis",
+             "password": "pass123",
+             "license_number": "QWE98765"},
+            {"username": "artemio",
+             "password": "pass123",
+             "license_number": "BVC65432"},
+            {"username": "ghost_man",
+             "password": "pass123",
+             "license_number": "LMN32109"},
         ]
 
         for driver in drivers:
             get_user_model().objects.create_user(**driver)
 
-        response = self.client.get(reverse("taxi:driver-list") + "?username=art")
+        response = self.client.get(
+            reverse("taxi:driver-list") + "?username=art")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context["driver_list"]), 1)
 
@@ -66,6 +75,7 @@ class FormTests(TestCase):
         for data in manufacturers:
             Manufacturer.objects.create(**data)
 
-        response = self.client.get(reverse("taxi:manufacturer-list") + "?name=g")
+        response = self.client.get(
+            reverse("taxi:manufacturer-list") + "?name=g")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context["manufacturer_list"]), 4)
