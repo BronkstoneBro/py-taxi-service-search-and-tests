@@ -41,7 +41,7 @@ class ManufacturerListView(LoginRequiredMixin, generic.ListView):
         context = super(ManufacturerListView, self).get_context_data(**kwargs)
         name = self.request.GET.get("name", "")
 
-        context["search_form"] = ManufacturerNameSearchForm(initial={"name": name})
+        context["search_form"] = ManufacturerSearchForm(initial={"name": name})
         return context
 
     def get_queryset(self):
